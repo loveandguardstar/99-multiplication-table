@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        p{
+            font-size: 50px;
+            left: 460px;
+            position: relative;
+        }
+        #parent_box {
+            width: 1000px;
+            position:relative;
+            left: 200px;
+            top: 10px;
+        }
+        .across_line {
+            width: 80px;
+            margin-left: 10px;
+            float: left;
+            position: relative;
+        }
+        .rank_line {
+            width: 80px;
+            height: 30px;
+            margin-top: 10px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <p>九九乘法表</p>
+    <div id="parent_box"></div>
+    <script>
+        var arr = ["yellow", "yellowgreen", "red", "orangered", "greenyellow"];
+        //初始化乘法表格数
+        var oParent_box = document.getElementById("parent_box");
+
+        //排版行
+        for(var i = 0; i < 9; i ++) {
+            var div = document.createElement("div");
+            div.setAttribute("class", "across_line");
+            oParent_box.appendChild( div );
+
+            var aSecond_cross_line = document.getElementsByClassName("across_line");
+            aSecond_cross_line[i].style.top = 40 * i + "px";
+
+            //排版列
+            for(var j = 0; j < 9 - i; j ++) {
+
+                var div1 = document.createElement("div");
+                div1.setAttribute("class", "rank_line");
+                aSecond_cross_line[i].appendChild( div1 );
+
+                var aThird_Rank_line = aSecond_cross_line[i].getElementsByClassName("rank_line");
+                aThird_Rank_line[j].style.backgroundColor = arr[aSecond_cross_line.length % arr.length];
+                aThird_Rank_line[j].innerHTML = (i+1) + " X " + (j + i + 1) + " = " + (i + 1) * (j + i +1);
+
+
+                //这一部分用来倒置 每一列，但是失败了   ？？？
+//                for(var k = 0; k < 9 - i; k ++) {
+//                    aThird_Rank_line[j].innerHTML = (i+1) + " X " + (9-j) + " = " + (i+1) * (9-j);
+//                }
+            }
+
+        }
+
+
+
+
+    </script>
+</body>
+</html>
